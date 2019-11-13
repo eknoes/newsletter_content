@@ -17,6 +17,8 @@
 namespace DavidEnke\NewsletterContentBundle\Classes;
 
 
+use Contao\DataContainer;
+
 /**
  * Class NewsletterContent
  *
@@ -40,7 +42,7 @@ class NewsletterContent extends \Newsletter {
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function send(\DataContainer $objDc) {
+	public function send(DataContainer $objDc) {
 
 		if (TL_MODE == 'BE') {
 			$GLOBALS['TL_CSS'][] = 'system/modules/newsletter_content/assets/css/style.css';
@@ -50,7 +52,7 @@ class NewsletterContent extends \Newsletter {
 			}
 		}
 
-		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
+		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.sender, c.template FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
 										->execute($objDc->id);
 
@@ -64,8 +66,8 @@ class NewsletterContent extends \Newsletter {
 			$GLOBALS['TL_CONFIG']['useSMTP'] = true;
 
 			$GLOBALS['TL_CONFIG']['smtpHost'] = $objNewsletter->smtpHost;
-			$GLOBALS['TL_CONFIG']['smtpUser'] = $objNewsletter->smtpUser;
-			$GLOBALS['TL_CONFIG']['smtpPass'] = $objNewsletter->smtpPass;
+			$GLOBALS['TL_CONFIG']['sender'] = $objNewsletter->sender;
+			$GLOBALS['TL_CONFIG']['template'] = $objNewsletter->template;
 			$GLOBALS['TL_CONFIG']['smtpEnc']  = $objNewsletter->smtpEnc;
 			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
 		}
