@@ -14,24 +14,38 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace NewsletterContent\Elements;
+namespace DavidEnke\NewsletterContentBundle\Elements;
 
 
 /**
- * Class ContentHeader
+ * Class ContentBreakRow
  *
- * Newsletter content element "header".
+ * Newsletter content element "breakrow".
  * @copyright    David Enke 2015
  * @author       David Enke <post@davidenke.de>
  * @package      newsletter_content
  */
-class ContentHeader extends ContentBoundaries {
+class ContentBreakRow extends \ContentElement {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'nl_header';
+	protected $strTemplate = 'nl_breakrow';
+
+
+	/**
+	 * Initialize the object
+	 * @param object
+	 * @param string
+	 */
+	public function __construct($objElement, $strColumn='main') {
+		parent::__construct($objElement, $strColumn);
+
+		if ($this->customTpl != '') {
+			$this->strTemplate = $this->customTpl;
+		}
+	}
 
 	/**
 	 * Parse the template
@@ -39,9 +53,17 @@ class ContentHeader extends ContentBoundaries {
 	 */
 	public function generate() {
 		if (TL_MODE == 'BE' && !defined('NEWSLETTER_CONTENT_PREVIEW')) {
-			return 'NEWSLETTER HEADER';
+			return 'NEWSLETTER ROW BREAK';
 		}
 
 		return parent::generate();
+	}
+
+
+	/**
+	 * Generate the content element
+	 */
+	protected function compile() {
+		return;
 	}
 }

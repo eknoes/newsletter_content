@@ -14,25 +14,39 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace NewsletterContent\Elements;
+namespace DavidEnke\NewsletterContentBundle\Elements;
 
 
 /**
- * Class ContentEvents
+ * Class ContentNews
  *
- * Newsletter content element "events".
+ * Newsletter content element "news".
  * @copyright    David Enke 2015
  * @author       David Enke <post@davidenke.de>
  * @package      newsletter_content
  */
-class ContentEvents extends ContentIncludes {
+class ContentNews extends ContentIncludes {
 
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'nl_events';
+	protected $strTemplate = 'nl_news';
+
+
+	/**
+	 * Initialize the object
+	 * @param object
+	 * @param string
+	 */
+	public function __construct($objElement, $strColumn='main') {
+		parent::__construct($objElement, $strColumn);
+
+		if ($this->customTpl != '') {
+			$this->strTemplate = $this->customTpl;
+		}
+	}
 
 
 	/**
@@ -40,22 +54,14 @@ class ContentEvents extends ContentIncludes {
 	 */
 	protected function compile() {
 		$arrItems = array();
-		$t = 'tl_calendar_events';
+		$t = 'tl_news';
 
 		if ($this->include_type == 'archives') {
 			$arrArchiveIds = deserialize($this->include_archives, true);
 			$strSortOrder = $this->sortOrder == 'ascending' ? 'ASC' : 'DESC';
 
 			if (sizeof($arrArchiveIds)) {
-				$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrArchiveIds)) . ")");
-		
-				if (!BE_USER_LOGGED_IN)
-				{
-					$time = time();
-					$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-				}
-
-				$objItems = \CalendarEventsModel::findBy($arrColumns, null, array('order'=>'startDate ' . $strSortOrder));
+				$objItems = \NewsModel::findPublishedByPids($arrArchiveIds, null, 0, 0, array('order'=>'date ' . $strSortOrder));
 			}
 		} else {
 			$arrItemIds = deserialize($this->include_items, true);
@@ -70,7 +76,7 @@ class ContentEvents extends ContentIncludes {
 					$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 				}
 
-				$objItems = \CalendarEventsModel::findBy($arrColumns, null);
+				$objItems = \NewsModel::findBy($arrColumns, null);
 			}
 		}
 
@@ -79,12 +85,8 @@ class ContentEvents extends ContentIncludes {
 				$objReaderPage = \PageModel::findById($objItems->getRelated('pid')->jumpTo);
 
 				$arrItem = $objItems->row();
-				$arrItem['dateStart'] = \Date::parse('Y-m-d', $objItems->startDate);
-				$arrItem['dateStartReadable'] = \Date::parse(\Config::get('dateFormat') ?: 'Y-m-d', $objItems->startDate);
-				if ($objItems->endDate) {
-					$arrItem['dateEnd'] = \Date::parse('Y-m-d', $objItems->endDate);
-					$arrItem['dateEndReadable'] = \Date::parse(\Config::get('dateFormat') ?: 'Y-m-d', $objItems->endDate);
-				}
+				$arrItem['date'] = \Date::parse('Y-m-d', $objItems->date);
+				$arrItem['dateReadable'] = \Date::parse(\Config::get('dateFormat') ?: 'Y-m-d', $objItems->date);
 				$arrItem['href'] = ampersand($this->generateFrontendUrl($objReaderPage->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objItems->alias != '') ? $objItems->alias : $objItems->id)));
 
 				$arrItems[$objItems->id] = $arrItem;

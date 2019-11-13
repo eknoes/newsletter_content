@@ -14,26 +14,18 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace NewsletterContent\Elements;
+namespace DavidEnke\NewsletterContentBundle\Elements;
 
 
 /**
- * Class ContentImage
+ * Class ContentIncludes
  *
- * Newsletter content element "image".
+ * Parent class for newsletter include content elements.
  * @copyright    David Enke 2015
  * @author       David Enke <post@davidenke.de>
  * @package      newsletter_content
  */
-class ContentImage extends \ContentImage {
-
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'nl_image';
-
-
+abstract class ContentIncludes extends \ContentElement {
 	/**
 	 * Initialize the object
 	 * @param object
@@ -45,13 +37,5 @@ class ContentImage extends \ContentImage {
 		if ($this->customTpl != '') {
 			$this->strTemplate = $this->customTpl;
 		}
-	}
-
-
-	/**
-	 * Generate the content element
-	 */
-	protected function compile() {
-		$this->addImageToTemplate($this->Template, $this->arrData, \Config::get('maxImageWidth'));
 	}
 }
