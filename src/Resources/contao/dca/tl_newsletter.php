@@ -7,6 +7,8 @@
  *
  */
 
+use DavidEnke\NewsletterContentBundle\Models\NewsletterTrackingModel;
+
 /**
  * @package newsletter_content
  *
@@ -75,7 +77,7 @@ class tl_newsletter_content extends tl_newsletter {
 
 		$intTotal = $arrRow['recipients'] + $arrRow['rejected'];
 //		$intTracked = NewsletterContent\Models\NewsletterTrackingModel::countTrackedByPid($arrRow['id']);
-		$objTracked = NewsletterContent\Models\NewsletterTrackingModel::findTrackedInteractionsByPid($arrRow['id']);
+		$objTracked = NewsletterTrackingModel::findTrackedInteractionsByPid($arrRow['id']);
 		$intTracked = !is_null($objTracked) ? $objTracked->count() : 0;
 		$intPercent = @round($intTracked / $intTotal * 100);
 		$strStats = sprintf(
@@ -143,7 +145,7 @@ class tl_newsletter_content extends tl_newsletter {
 
 
 	public function removeTrackedData(\DataContainer $dc, $intId) {
-		$objTracking = NewsletterContent\Models\NewsletterTrackingModel::findByPid($dc->activeRecord->id);
+		$objTracking = NewsletterTrackingModel::findByPid($dc->activeRecord->id);
 		if (!is_null($objTracking)) {
 			while ($objTracking->next()) {
 				$objTracking->delete();

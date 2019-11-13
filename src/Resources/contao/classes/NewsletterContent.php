@@ -17,7 +17,10 @@
 namespace DavidEnke\NewsletterContentBundle\Classes;
 
 
+use Contao\Database\Result;
 use Contao\DataContainer;
+use Contao\Email;
+use Newsletter;
 
 /**
  * Class NewsletterContent
@@ -27,7 +30,7 @@ use Contao\DataContainer;
  * @author     David Enke <post@davidenke.de>
  * @package    newsletter_content
  */
-class NewsletterContent extends \Newsletter {
+class NewsletterContent extends Newsletter {
 
 	protected $isFlexible = false;
 
@@ -488,7 +491,7 @@ class NewsletterContent extends \Newsletter {
 	 * @param string
 	 * @return string
 	 */
-	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $body, $css=null)
+	protected function sendNewsletter(Email $objEmail, Result $objNewsletter, $arrRecipient, $text, $body, $css=null)
 	{
 		// Prepare the text content
 		$objEmail->text = \StringUtil::parseSimpleTokens($text, $arrRecipient);

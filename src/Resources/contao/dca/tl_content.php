@@ -332,14 +332,14 @@ class tl_content_newsletter extends Backend {
 				$strTable = 'tl_news_archive';
 				$strTitleKey = 'title';
 				$strPatternUrl = 'contao/main.php?do=news&id=%s&act=edit&popup=1&nb=1&rt=%s';
-				$objArchives = \NewsArchiveModel::findAll(array('order'=>$strTable . '.' . $strTitleKey));
+				$objArchives = NewsArchiveModel::findAll(array('order'=>$strTable . '.' . $strTitleKey));
 				break;
 
 			case 'nl_events':
 				$strTable = 'tl_calendar';
 				$strTitleKey = 'title';
 				$strPatternUrl = 'contao/main.php?do=calendar&id=%s&act=edit&popup=1&nb=1&rt=%s';
-				$objArchives = \CalendarModel::findAll(array('order'=>$strTable . '.' . $strTitleKey));
+				$objArchives = CalendarModel::findAll(array('order'=>$strTable . '.' . $strTitleKey));
 				break;
 
 			default:

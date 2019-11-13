@@ -17,6 +17,8 @@
 namespace DavidEnke\NewsletterContentBundle\Classes;
 
 
+use Newsletter;
+
 /**
  * Class NewsletterContent
  *
@@ -25,7 +27,7 @@ namespace DavidEnke\NewsletterContentBundle\Classes;
  * @author     David Enke <post@davidenke.de>
  * @package    newsletter_content
  */
-class NewsletterStatistics extends \Newsletter {
+class NewsletterStatistics extends Newsletter {
 
 	protected $isFlexible = false;
 

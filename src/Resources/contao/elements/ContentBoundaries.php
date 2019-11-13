@@ -17,6 +17,9 @@
 namespace DavidEnke\NewsletterContentBundle\Elements;
 
 
+use NewsletterChannelModel;
+use NewsletterModel;
+
 /**
  * Class ContentBoundaries
  *
@@ -45,8 +48,8 @@ abstract class ContentBoundaries extends \ContentElement {
 	 * Generate the content element
 	 */
 	protected function compile() {
-		$objNewsletter = \NewsletterModel::findByIdOrAlias($this->pid);
-		$objNewsletterChannel = \NewsletterChannelModel::findByIds(array($objNewsletter->pid), array('limit' => 1));
+		$objNewsletter = NewsletterModel::findByIdOrAlias($this->pid);
+		$objNewsletterChannel = NewsletterChannelModel::findByIds(array($objNewsletter->pid), array('limit' => 1));
 
 		$this->Template->setData($objNewsletter->row());
 

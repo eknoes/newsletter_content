@@ -20,14 +20,14 @@
  * Back end modules
  */
 $GLOBALS['BE_MOD']['content']['newsletter']['tables'][] = 'tl_content';
-$GLOBALS['BE_MOD']['content']['newsletter']['send'] = array('NewsletterContent\Classes\NewsletterContent', 'send');
-$GLOBALS['BE_MOD']['content']['newsletter']['stats'] = array('NewsletterContent\Classes\NewsletterStatistics', 'show');
+$GLOBALS['BE_MOD']['content']['newsletter']['send'] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterContent', 'send');
+$GLOBALS['BE_MOD']['content']['newsletter']['stats'] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'show');
 
 
 /**
  * Frond end modules
  */
-$GLOBALS['FE_MOD']['newsletter']['nl_reader'] = 'NewsletterContent\Modules\ModuleNewsletterReader';
+$GLOBALS['FE_MOD']['newsletter']['nl_reader'] = 'DavidEnke\NewsletterContentBundle\Modules\ModuleNewsletterReader';
 
 
 /**
@@ -35,16 +35,16 @@ $GLOBALS['FE_MOD']['newsletter']['nl_reader'] = 'NewsletterContent\Modules\Modul
  */
 array_insert($GLOBALS['TL_CTE'], 10, array(
 	'newsletter' => array(
-		'nl_header'          => 'NewsletterContent\Elements\ContentHeader',
-		'nl_breakrow'        => 'NewsletterContent\Elements\ContentBreakRow',
-		'nl_breaktable'      => 'NewsletterContent\Elements\ContentBreakTable',
-		'nl_footer'          => 'NewsletterContent\Elements\ContentFooter',
-		'nl_text'            => 'NewsletterContent\Elements\ContentText',
-		'nl_image'           => 'NewsletterContent\Elements\ContentImage',
-		'nl_gallery'         => 'NewsletterContent\Elements\ContentGallery',
-		'nl_news'            => 'NewsletterContent\Elements\ContentNews',
-		'nl_events'          => 'NewsletterContent\Elements\ContentEvents',
-		'nl_form'            => 'NewsletterContent\Elements\ContentForm'
+		'nl_header'          => 'DavidEnke\NewsletterContentBundle\Elements\ContentHeader',
+		'nl_breakrow'        => 'DavidEnke\NewsletterContentBundle\Elements\ContentBreakRow',
+		'nl_breaktable'      => 'DavidEnke\NewsletterContentBundle\Elements\ContentBreakTable',
+		'nl_footer'          => 'DavidEnke\NewsletterContentBundle\Elements\ContentFooter',
+		'nl_text'            => 'DavidEnke\NewsletterContentBundle\Elements\ContentText',
+		'nl_image'           => 'DavidEnke\NewsletterContentBundle\Elements\ContentImage',
+		'nl_gallery'         => 'DavidEnke\NewsletterContentBundle\Elements\ContentGallery',
+		'nl_news'            => 'DavidEnke\NewsletterContentBundle\Elements\ContentNews',
+		'nl_events'          => 'DavidEnke\NewsletterContentBundle\Elements\ContentEvents',
+		'nl_form'            => 'DavidEnke\NewsletterContentBundle\Elements\ContentForm'
 	)
 ));
 
@@ -52,10 +52,10 @@ array_insert($GLOBALS['TL_CTE'], 10, array(
 /**
  * Models
  */
-$GLOBALS['TL_MODELS']['tl_newsletter_tracking'] = 'NewsletterContent\Models\NewsletterTrackingModel';
+$GLOBALS['TL_MODELS']['tl_newsletter_tracking'] = 'DavidEnke\NewsletterContentBundle\Models\NewsletterTrackingModel';
 
 
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = array('NewsletterContent\Classes\NewsletterStatistics', 'clean');
+$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'clean');

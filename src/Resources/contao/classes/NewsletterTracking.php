@@ -17,6 +17,8 @@
 namespace DavidEnke\NewsletterContentBundle\Classes;
 
 
+use DavidEnke\NewsletterContentBundle\Models\NewsletterTrackingModel;
+
 /**
  * Class NewsletterContent
  *
@@ -68,7 +70,7 @@ class NewsletterTracking extends \Controller
 			$intAccessed = 0;
 			if (\Input::get('n') && \Input::get('e'))
 			{
-				$intAccessed = \NewsletterContent\Models\NewsletterTrackingModel::countTrackedByPidAndEmail(\Input::get('n'), \Input::get('e'));
+				$intAccessed = NewsletterTrackingModel::countTrackedByPidAndEmail(\Input::get('n'), \Input::get('e'));
 			}
 			header('Access-Count: ' . strval($intAccessed));
 		}
@@ -76,7 +78,7 @@ class NewsletterTracking extends \Controller
 		// track
 		if (\Input::get('t') && \Input::get('n') && \Input::get('e')/*  && !\Input::get('preview') */)
 		{
-			$objTracking = new \NewsletterContent\Models\NewsletterTrackingModel();
+			$objTracking = new NewsletterTrackingModel();
 
 			$objTracking->tstamp = time();
 			$objTracking->pid = \Input::get('n');

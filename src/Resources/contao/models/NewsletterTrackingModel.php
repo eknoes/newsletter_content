@@ -11,12 +11,14 @@
 namespace DavidEnke\NewsletterContentBundle\Models;
 
 
+use Model;
+
 /**
  * Reads and writes newsletters
  *
  * @author David Enke <post@davidenke.de>
  */
-class NewsletterTrackingModel extends \Model
+class NewsletterTrackingModel extends Model
 {
 
 	/**
