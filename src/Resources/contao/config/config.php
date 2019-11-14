@@ -21,7 +21,7 @@
  */
 $GLOBALS['BE_MOD']['content']['newsletter']['tables'][] = 'tl_content';
 $GLOBALS['BE_MOD']['content']['newsletter']['send'] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterContent', 'send');
-//$GLOBALS['BE_MOD']['content']['newsletter']['stats'] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'show');
+$GLOBALS['BE_MOD']['content']['newsletter']['stats'] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'show');
 
 
 /**
@@ -58,4 +58,4 @@ $GLOBALS['TL_MODELS']['tl_newsletter_tracking'] = 'DavidEnke\NewsletterContentBu
 /**
  * Hooks
  */
-#$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'clean');
+$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = array('DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics', 'clean');
