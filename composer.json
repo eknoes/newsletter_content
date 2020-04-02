@@ -19,7 +19,7 @@
     },
     "require": {
         "contao/core":">=3.2,<4.0",
-        "contao-community-alliance/composer-installer":"*",
+        "contao-community-alliance/composer-installer":"*"
     },
     "autoload": {
         "classmap": ["system/"]
