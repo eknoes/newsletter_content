@@ -58,4 +58,4 @@ $GLOBALS['TL_MODELS']['tl_newsletter_tracking'] = 'DavidEnke\NewsletterContentBu
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = [DavidEnke\NewsletterContentBundle\Classes\NewsletterStatistics::class, 'clean'];
+$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = ['NewsletterStatistics', 'clean'];
